@@ -46,10 +46,12 @@ node[:applications].each do |app,data|
     action :run
   end
 
-  execute "install solr package" do
-    command("cd /data/#{app}/jettyapps/ && " +
+  execute "install solr example package" do
+    command("if [ ! -e /data/#{app}/jettyapps/solr ]; then cd /data/#{app}/jettyapps && " +
             "wget -O apache-solr-1.3.0.tgz http://mirror.cc.columbia.edu/pub/software/apache/lucene/solr/1.3.0/apache-solr-1.3.0.tgz && " +
-            "tar --directory=solr -strip-components=1 -zxvf -O apache-solr-1.3.0.tgz")
+            "tar -xzf apache-solr-1.3.0.tgz && " +
+            "mv apache-solr-1.3.0/example solr && " + 
+            "rm -rf apache-solr-1.3.0; fi")
     action :run
   end
 
