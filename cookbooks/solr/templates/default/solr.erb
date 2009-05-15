@@ -28,7 +28,6 @@ if [ -d /data/$1/jettyapps/solr ]; then
         fi
       fi
 
-      nohup java -Djava.net.preferIPv4Stack=true -Dsolr.data.dir=/u/apps/koda/shared/solr -Djetty.port=9080 -Djetty.logs=$LOG_BASE -Xms128M -Xmx256M -jar start.jar >> $LOG_BASE/$1.log 2>> $LOG_BASE/$1.err.log &
       nohup java -Djava.net.preferIPv4Stack=true -Dsolr.solr.home=solr -jar start.jar >> /var/log/engineyard/solr/$1.log 2>> /var/log/engineyard/solr/$1.err.log &
       echo $! > /var/run/solr/$1.pid
       ;;
