@@ -14,6 +14,13 @@ node[:applications].each do |app,data|
     recursive true
   end
 
+  directory "/var/run/solr" do
+    owner node[:owner_name]
+    group node[:owner_name]
+    mode 0755
+    recursive true
+  end
+
   template "/engineyard/bin/solr" do
     source "solr.erb"
     owner node[:owner_name]
