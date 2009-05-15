@@ -7,18 +7,21 @@ require 'digest/sha1'
 
 node[:applications].each do |app,data|
 
-  directory "/data/#{app}/jettyapps" do
+  directory "/data/#{app}/jettyapps/solr" do
     owner node[:owner_name]
     group node[:owner_name]
     mode 0755
     recursive true
   end
 
-  remote_file "/data/#{app}/jettyapps/solr" do
-    source "solr"
+  template "/engineyard/bin/solr" do
+    source "solr.erb"
     owner node[:owner_name]
     group node[:owner_name]
     mode 0755
+    variables({
+      :rails_env => node[:environment][:framework_env]
+    })
   end
 
   template "/etc/monit.d/solr.#{app}.monitrc" do

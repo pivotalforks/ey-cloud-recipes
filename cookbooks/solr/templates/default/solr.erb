@@ -4,7 +4,7 @@
 # This script belongs in /engineyard/bin/solr
 #
 PATH=/bin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:$PATH
-RAILS_ENV=production; export RAILS_ENV
+RAILS_ENV=<%= @rails_env %>; export RAILS_ENV
 
 usage() {
   echo "Usage: $0 <appname> {start, stop}"
