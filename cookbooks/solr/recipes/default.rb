@@ -50,6 +50,14 @@ node[:applications].each do |app,data|
     action :run
   end
 
+  link "/data/#{app}/jettyapps/solr/solr/conf/schema.xml" do
+    to "/data/#{app}/current/vendor/plugins/acts_as_solr/solr/solr/conf/schema.xml"
+  end
+
+  link "/data/#{app}/jettyapps/solr/solr/conf/solrconfig.xml" do
+    to "/data/#{app}/current/vendor/plugins/acts_as_solr/solr/solr/conf/solrconfig.xml"
+  end
+
   execute "restart-monit-solr" do
     command "/usr/bin/monit reload && " +
             "/usr/bin/monit restart all -g solr_#{app}"
